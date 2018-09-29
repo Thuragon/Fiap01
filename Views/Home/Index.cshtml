@@ -1,5 +1,24 @@
-﻿@{ 
-    Layout = null;
+﻿@model IEnumerable<Pergunta>
+@{
+    //Layout = "~/Views/Shared/_Layout.cshtml"; funciona assim tambem s
+    Layout = "_Layout";
 }
-<h1>Home</h1>
+<h1>Home @ViewBag.Nome </h1>
+<h1>Home @ViewData["MeuNome"] </h1>
 <p> Twitter @@joaoRoberto </p>
+
+<img src="~/goku.jpg" />
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <p>@item.Id </p>
+            <p>@item.Descricao </p>
+            <p>@item.Autor </p>
+        </li>
+    }
+</ul>
+
+@*<p>@Model.Id</p>
+    <p>@Model.Autor</p>
+    <p>@Model.Descricao</p>*@
