@@ -1,6 +1,8 @@
 ﻿using Fiap01.Data;
+using Fiap01.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,9 +20,33 @@ namespace Fiap01
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            #region exemplo de middleware
+            //app.Use((context, next) =>
+            //{
+            //    context.Response.Headers.Add("X-Teste", "headerteste");
+            //    return next();
+            //});
+
+            //app.Use(async (context, next) =>
+            //{
+            //    var teste = 123;
+            //    await next.Invoke();
+            //    var teste2 = 1234;
+            //});
+
+            //app.Run(async context =>
+            //{
+            //    await context.Response.WriteAsync("boa noite");
+            //});
+            #endregion
+
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
+
+            //app.UseMiddleware<LogMiddleware>();
+
+            app.UseMeuLogPreza();
 
             app.UseMvc(routes =>
             {
@@ -30,6 +56,7 @@ namespace Fiap01
                         template: "{controller=Home}/{action=Index}/{id?}"
                 );
 
+                #region exemplo de rotas
                 //routes.MapRoute(
                 //    name: "autor",
                 //    template: "autor/{nome}",
@@ -47,6 +74,7 @@ namespace Fiap01
                 //  template: "{categoria}/{topico}",
                 //  defaults: new { controller = "Topico", action = "Index" }
                 //  );
+                #endregion
 
 
             });
